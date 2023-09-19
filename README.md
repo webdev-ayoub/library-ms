@@ -5,10 +5,15 @@ Open cmd in root folder & Run:
     * npm install && npm run dev
 
 After that open another cmd & run:
+
     * composer install
+    
 and
+
     * php artisan migrate
+    
 and
+
     * php artisan serve
     
 <p align="center">
