@@ -21,11 +21,19 @@
 
    @if ($tableShow === true)
       <div class="w-full mb-8 flex flex-col items-center sm:justify-center sm:ml-0">
-         <input
-            class="block w-75 my-1 text-sm dark:border-gray-600 dark:bg-gray-700 bg-slate-100 
+         <div class="flex gap-4 mb-3">
+            <input
+               class="block w-auto shadow my-1 text-sm dark:border-gray-600 dark:bg-gray-700 bg-slate-100 
             focus:border-purple-400 focus:outline-none focus:shadow-outline-purple mb-2
             dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded p-2"
-            placeholder="Search for author..." wire:model='search' />
+               placeholder="Search for a book..." wire:model='searchBook' type="text" />
+            <input
+               class="block w-auto shadow my-1 text-sm dark:border-gray-600 dark:bg-gray-700 bg-slate-100 
+            focus:border-purple-400 focus:outline-none focus:shadow-outline-purple mb-2
+            dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded p-2"
+               placeholder="Search for a author..." wire:model='searchAuthor' type="text" />
+         </div>
+
          <table class="table-auto w-9/12 whitespace-no-wrap rounded border border-2 border-blue-500 mb-2">
             <thead>
                <tr
@@ -59,7 +67,6 @@
                @endforeach
             </tbody>
          </table>
-         {{ $books->links() }}
       </div>
    @endif
 

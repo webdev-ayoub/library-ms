@@ -35,13 +35,13 @@ class Login extends Component
    {
 
       $this->validate([
-         "name" => ['required', 'string'],
+         "email" => ['required', 'string'],
          "password" => ['required']
       ]);
 
       $user = Auth::attempt(
          [
-            'name' => $this->name,
+            'email' => $this->email,
             'password' => $this->password
          ]
       );

@@ -15,7 +15,8 @@ class Books extends Component
    public $createForm = false;
    public $updateForm = false;
 
-   public $search;
+   public $searchBook;
+   public $searchAuthor;
 
    public $book_id;
    public $title;
@@ -28,9 +29,20 @@ class Books extends Component
       $books_count = Book::get();
       $authors = Author::get();
 
-      $books = Book::where('title', 'LIKE', '%' . $this->search . '%')
-         ->orderBy("id", "DESC")
-         ->paginate(10);
+      $books = Book::query();
+
+      if ($this->searchBook) {
+         $books = Book::where('title', 'LIKE', '%' . $this->searchBook . '%')
+            ->orderBy("id")->get();
+      } else if ($this->searchAuthor) {
+         foreach ($authors as $author) {
+            if (str_starts_with($author->firstname . " " . $author->lastname, $this->searchAuthor)) {
+               $books = Book::Where('author_id', $author->id)->orderBy("id")->get();
+            }
+         }
+      } else {
+         $books = Book::all();
+      }
 
       return view('livewire.books', [
          "books" => $books,

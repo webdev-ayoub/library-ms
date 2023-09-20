@@ -10,7 +10,7 @@
             @csrf
             <div class="flex flex-col gap-3">
                <div class="flex flex-col">
-                  <input
+                  <input autofocus
                      class="block w-auto mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 
                focus:border-purple-400 focus:outline-none focus:shadow-outline-purple 
                dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded p-3"
@@ -58,12 +58,12 @@
             @csrf
             <div class="flex flex-col gap-3">
                <div class="flex flex-col">
-                  <input
+                  <input autofocus type="email"
                      class="block w-auto mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 
                focus:border-purple-400 focus:outline-none focus:shadow-outline-purple 
                dark:text-gray-300 dark:focus:shadow-outline-gray form-input rounded p-3"
-                     placeholder="Name" wire:model='name' />
-                  @error('name')
+                     placeholder="Email" wire:model='email' />
+                  @error('email')
                      <span class="text-red-600">{{ $message }}</span>
                   @enderror
                </div>
