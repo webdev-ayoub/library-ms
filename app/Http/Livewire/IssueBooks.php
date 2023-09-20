@@ -20,7 +20,6 @@ class IssueBooks extends Component
    public $return_date;
 
    public $issuedBook_id;
-   public $books;
    public $authors;
 
    public $fromDate;
@@ -30,7 +29,8 @@ class IssueBooks extends Component
    {
       $issuedBooks_count = issueBook::get();
       $all_books = Book::get();
-      $this->books = Book::orderBy("id", "DESC")->get();
+
+      $issueBooks = issueBook::query();
 
       if ($this->fromDate && $this->toDate) {
          $issueBooks = issueBook::whereBetween('issue_date', [$this->fromDate, $this->toDate])
@@ -165,5 +165,12 @@ class IssueBooks extends Component
    {
       $result = issueBook::find($id);
       $result->delete();
+   }
+
+   public function clearFilter()
+   {
+      $this->toDate = '';
+      $this->fromDate = '';
+      $this->book_id = '';
    }
 }

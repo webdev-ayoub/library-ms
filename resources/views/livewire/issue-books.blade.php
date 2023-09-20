@@ -21,24 +21,31 @@
 
    @if ($tableShow === true)
       <div class="w-full mb-8 flex flex-col items-center sm:justify-center sm:ml-0">
-         <div class="flex flex-col items-center sm:flex-row gap-2 mb-2">
+         <div class="flex flex-col items-center justify-center sm:flex-row gap-3 mb-3">
             <input
-               class="block w-75 text-sm bg-slate-100 focus:border-purple-400 
-               focus:outline-none focus:shadow-outline-purple mb-2 form-input 
+               class="block w-full shadow text-sm bg-slate-200 focus:border-purple-400 
+               focus:outline-none focus:shadow-outline-purple mb-2
                rounded p-2"
                placeholder="Search for author..." type="date" wire:model='fromDate' />
             <input
-               class="block w-75 text-sm bg-slate-100 focus:border-purple-400 
-               focus:outline-none focus:shadow-outline-purple mb-2 form-input 
+               class="block w-full shadow text-sm bg-blue-300 font-bold focus:border-purple-400 
+            focus:outline-none focus:shadow-outline-purple mb-2
+            rounded-full p-2"
+               type="button" value="Clear" wire:click.prevent='clearFilter' />
+            <input
+               class="block w-full shadow text-sm bg-slate-200 focus:border-purple-400 
+               focus:outline-none focus:shadow-outline-purple mb-2 
                rounded p-2"
                placeholder="Search for author..." type="date" wire:model='toDate' />
+         </div>
+         <div class="mb-3">
             <select
-               class="block w-75 text-sm bg-slate-100 focus:border-purple-400 
-            focus:outline-none focus:shadow-outline-purple mb-2 form-input 
-            rounded p-2"
+               class="block w-full shadow text-sm bg-slate-200 focus:border-purple-400 
+         focus:outline-none focus:shadow-outline-purple mb-2
+         rounded p-2"
                wire:model='book_id'>
-               <option selected>Select Book</option>
-               @foreach ($books as $book)
+               <option selected value="">Select Book</option>
+               @foreach ($all_books as $book)
                   <option value="{{ $book->id }} "> {{ $book->title }} </option>
                @endforeach
             </select>
@@ -67,11 +74,11 @@
                      </td>
                      <td class="p-3">{{ ucwords($issueBook->issue_date) }}</td>
                      <td class="p-3">{{ ucwords($issueBook->return_date) }}</td>
-                     <td class="p-3">
+                     <td class="p-3 w-auto">
                         <button class="btn bg-green-500 rounded p-1 font-bold text-white"
                            wire:click.prevent='edit({{ $issueBook->id }})'>Edit</button>
                         <button class="btn bg-red-500 rounded p-1 font-bold text-white"
-                           wire:click.prevent='destroy({{ $issueBook->id }})' id="delBtn">Delete</button>
+                           wire:click.prevent='destroy({{ $issueBook->id }})'>Delete</button>
                      </td>
                   </tr>
                @endforeach
@@ -89,7 +96,7 @@
                <div class="flex flex-col">
                   <select class="rounded p-1" wire:model.lazy='book_id'>
                      <option selected>Select Book</option>
-                     @foreach ($books as $book)
+                     @foreach ($all_books as $book)
                         <option value="{{ $book->id }} "> {{ $book->title }} </option>
                      @endforeach
                   </select>
